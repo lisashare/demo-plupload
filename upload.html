@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Plupload-demo</title>
+    <link href="https://static.kuaidao.cn/kdbrand/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://static.kuaidao.cn/kdbrand/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <style>
+        ul,li{
+            list-style: none;
+        }
+        form{
+            width: 800px;
+            height: 400px;
+            margin: 50px auto;
+            padding: 43px;
+            border: 1px solid #ccc;
+        }
+        .box{
+            min-height: 220px;
+        }
+        label{
+            line-height: 34px;
+        }
+        .thumbnail{
+            width: 130px;
+        }
+        img{
+            height: 150px!important;
+        }
+        .btn-trash{
+            position: absolute;
+            top: 0;right: 5px;
+        }
+        .list-inline{
+            margin-top: 15px;
+        }
+        .list-inline li{
+            position: relative;
+            float: left;
+        }
+        .btn-trash{
+            display: block;
+            position: absolute;
+            top: -8px;right: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%; 
+            background-image: url(img/icon_gb@3x.png);
+            background-repeat: no-repeat;
+            background-size: 26px 26px;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 以最多上传3张图片为例 -->
+    <form name="plupload">
+        <div class="form-group box">
+            <label for="c-avatar" class="control-label col-md-1">LOGO</label>
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input id="c-avatar" class="form-control" size="40" name="" type="text" value="">
+                    <div class="no-border no-padding" style="white-space: nowrap">
+                        <span>
+                            <button type="button" id="plupload-avatar" class="btn btn-info plupload" 
+                            data-input-id="c-avatar"
+                            data-mimetype="image/jpeg,image/png,image/jpg" 
+                            data-multiple="true" 
+                            data-preview-id="p-avatar"
+                            data-maxcount="3"
+                            data-maxsize="500KB"
+                            data-url="upload.php">上传图片</button>
+                        </span>
+                    </div>
+                </div>
+                <ul class="row list-inline plupload-preview" id="p-avatar"></ul>
+            </div>
+        </div>
+        <div class="col-md-12"><button type="button" class="btn btn-success" id="start_upload">开始上传</button>
+        </div>
+    </form>
+<!-- 首先需要引入plupload的源代码 -->
+<script src="https://static.kuaidao.cn/kdbrand/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://static.kuaidao.cn/kdbrand/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="plupload/js/plupload.full.min.js"></script>
+<!-- PC-拖拽功能 -->
+<!-- <script src="js/jquery.dragsort.js"></script> -->
+<script src="js/index.js"></script>
+<script>
+    // 点击开始上传
+    $(document).on('click', '#start_upload',function(){
+        if( $('#c-avatar').val() ){
+            // 传递给后端
+            console.log($('input').val())
+        }
+    });
+    
+    pluploadFun();
+    function pluploadFun(form) {
+        //绑定plupload上传元素事件
+        if ($(".plupload", form).size() > 0) {
+            Upload.api.plupload($(".plupload", form));
+        }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plupload-demo</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript">
+        /* 移动端适配 rem */
+        (function(){
+            setRem();
+            window.addEventListener('orientationchange' in window?"orientationchange":"resize",setRem);
+            function setRem(){
+                var html = document.getElementsByTagName('html')[0];
+                var pageWidth = html.getBoundingClientRect().width;
+                html.style.fontSize = pageWidth/15+'px';
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- 以最多上传3张图片为例 -->
+    <div class="fix-top">
+        <i></i>
+        <div class="fix-top-title">返图上传</div>
+    </div>
+    <form name="plupload">
+        <div class="form-group box">
+            <div class="form-group-wrapper">
+                <div class="input-group">
+                    <input id="c-avatar" class="form-control hidden" name="" type="text" value="">
+                    <div>
+                        <span class="qt-span">
+                            <button type="button" id="plupload-avatar" class="btn btn-info plupload" 
+                            data-input-id="c-avatar"
+                            data-mimetype="image/jpeg,image/png,image/jpg" 
+                            data-multiple="true" 
+                            data-preview-id="p-avatar"
+                            data-maxcount="3"
+                            data-maxsize="500KB"
+                            data-url="upload.php">上传图片</button>
+                        </span>
+                    </div>
+                </div>
+                <ul class="row list-inline plupload-preview clear" id="p-avatar"></ul> 
+            </div>
+        </div>
+        <div class="submit">
+            <button type="button" class="btn btn-success" id="start_upload">开始上传</button>
+        </div>
+    </form>
+    <div class="explain">
+        <p class="explain-title">返图说明：</p>
+        <ul>
+            <li><i></i>要求上传三张图片，每张图片小于500KB；</li>
+            <li><i></i>图一：附带清晰门头，活动宣传物品的正面照片；</li>
+            <li><i></i>图二：附带清晰品牌标志的火爆排队照片；</li>
+            <li><i></i>图三：附带清晰门头，消费者手拿产品的照片。</li>
+        </ul>
+    </div>
+<!-- 首先需要引入plupload的源代码 -->
+<script src="https://static.kuaidao.cn/kdbrand/jquery/2.1.4/jquery.min.js"></script>
+<script src="plupload/js/plupload.full.min.js"></script>
+<!-- PC-拖拽功能 -->
+<!-- <script src="js/jquery.dragsort.js"></script> -->
+<script src="js/index.js"></script>
+<script>
+    // 点击开始上传
+    $(document).on('click', '#start_upload',function(){
+        if( $('#c-avatar').val() ){
+            // 传递给后端
+            console.log($('input').val())
+        }
+    });
+    
+    pluploadFun();
+    function pluploadFun(form) {
+        //绑定plupload上传元素事件
+        if ($(".plupload", form).size() > 0) {
+            Upload.api.plupload($(".plupload", form));
+        }
+    }
+    </script>
+</body>
+</html>
